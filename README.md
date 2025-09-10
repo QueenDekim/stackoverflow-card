@@ -67,7 +67,7 @@ Some card examples can be found [here](themes.md).
 
 #### Use GitHub's theme context tag
 
-You can use [GitHub's theme context](https://github.blog/changelog/2021-11-24-specify-theme-context-for-images-in-markdown/) to make the card match the user's GitHub theme automatically. Just add #gh-dark-mode-only or #gh-light-mode-only at the end of an image link. This tells GitHub how to show the card to users with a light or dark theme preference.
+You can use [GitHub's theme context](https://github.blog/changelog/2021-11-24-specify-theme-context-for-images-in-markdown/) to make the card match the user's GitHub theme automatically. Just add `#gh-dark-mode-only` or `#gh-light-mode-only` at the end of an image link. This tells GitHub how to show the card to users with a light or dark theme preference.
 
 ```md
 [![StackOverflow Card Light](https://stackoverflow-card-tan.vercel.app/?userID=536223&site=ru.stackoverflow&theme=tomorrow#gh-light-mode-only)](https://stackoverflow-card-tan.vercel.app/?userID=536223&site=ru.stackoverflow&theme=tomorrow#gh-light-mode-only)
