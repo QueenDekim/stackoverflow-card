@@ -3,6 +3,7 @@ import {
   reputation,
   achievementsSm,
   medal,
+  source,
   logo,
 } from "./artwork.js";
 import { themes } from "./themes.js";
@@ -43,6 +44,16 @@ const statLine = (icon, iconColor, label, value) => {
   `;
 };
 
+function getRootUrl(url) {
+  try {
+    const parsedUrl = new URL(url.startsWith('http') ? url : `https://${url}`);
+    return parsedUrl.hostname;
+  } catch (error) {
+    console.error('Invalid URL:', error);
+    return null;
+  }
+}
+
 export const StackOverflowCard = async (
   data,
   ratingText,
@@ -64,7 +75,7 @@ export const StackOverflowCard = async (
   }
 
   const width = 325;
-  const height = showLogo ? 150 : 105;
+  const height = showLogo ? 170 : 125;
 
   let logoSvg;
   if (showLogo) {
@@ -80,6 +91,13 @@ export const StackOverflowCard = async (
   }
 
   const iconSize = 16;
+
+  const lineSrc = statLine(
+    showIcons ? source(iconSize) : null,
+    colors.icon,
+    "Source",
+    getRootUrl(data.link)
+  );
 
   const lineRep = statLine(
     showIcons ? coinsMono(iconSize) : null,
@@ -119,7 +137,7 @@ export const StackOverflowCard = async (
     40
   );
 
-  const lines = [lineRep, lineRepYear, lineRating, lineBadges];
+  const lines = [lineSrc, lineRep, lineRepYear, lineRating, lineBadges];
   let linesStr = ``;
   const yOffset = showLogo ? 55 : 0;
   for (let i = 0; i < lines.length; i++) {
