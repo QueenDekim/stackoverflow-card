@@ -11,6 +11,17 @@ Get dynamically generated StackOverflow stats on your readmes.
   src="https://stackoverflow-card.vercel.app/?userID=353337&theme=dracula"
 />
 
+You can optionally provide a site parameter to retrieve data from a specific site in the StackExchange ecosystem.<br>For example:
+
+```markdown
+<img height="137px"
+  src="https://stackoverflow-card.vercel.app/?userID=353337&theme=dracula&site=askubuntu"
+/>
+```
+<img height="137px"
+  src="https://stackoverflow-card.vercel.app/?userID=353337&theme=dracula&site=askubuntu"
+/>
+
 You have to provide a valid `userID`. Apart from that, StackOverflow Card supports
 several options (with their default values):
 ```
@@ -19,6 +30,7 @@ theme: [stackoverflow-dark, stackoverflow-light, dracula, ...]
 showBorder: true
 showIcons: true
 showAnimations: true
+site: stackoverflow
 ```
 See [here](https://github.com/nschloe/stackoverflow-card/blob/main/src/themes.js) for
 all available themes. Some examples
