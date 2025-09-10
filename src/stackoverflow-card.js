@@ -75,7 +75,7 @@ export const StackOverflowCard = async (
   }
 
   const width = 325;
-  const height = showLogo ? 170 : 125;
+  let height = showLogo ? 170 : 125;
 
   let logoSvg;
   if (showLogo) {
@@ -137,7 +137,14 @@ export const StackOverflowCard = async (
     40
   );
 
-  const lines = [lineSrc, lineRep, lineRepYear, lineRating, lineBadges];
+  let lines
+  if(getRootUrl(data.link) == "stackoverflow.com"){
+    lines = [lineRep, lineRepYear, lineRating, lineBadges];
+    height = showLogo ? 150 : 125;
+  } else {
+    lines = [lineSrc, lineRep, lineRepYear, lineRating, lineBadges];
+  }
+  
   let linesStr = ``;
   const yOffset = showLogo ? 55 : 0;
   for (let i = 0; i < lines.length; i++) {
