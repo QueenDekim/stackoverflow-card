@@ -44,6 +44,15 @@ http
     }
     const userID = searchParams.get("userID");
 
+    // Get the site parameter and remove .com if it exists
+    let site = searchParams.has("site") 
+      ? searchParams.get("site") 
+      : "stackoverflow";
+    
+    if (site.endsWith('.com')) {
+      site = site.substring(0, site.length - 4);
+    }
+
     const showLogo = searchParams.has("showLogo")
       ? stringToBoolean(searchParams.get("showLogo"))
       : true;
@@ -64,8 +73,9 @@ http
       ? stringToBoolean(searchParams.get("showAnimations"))
       : true;
 
+    // Using site in API request
     const responseArticles = await fetch(
-      `https://api.stackexchange.com/2.3/users/${userID}?site=stackoverflow`
+      `https://api.stackexchange.com/2.3/users/${userID}?site=${site}`
     );
     const json = await responseArticles.json();
 
@@ -75,10 +85,10 @@ http
       return;
     }
 
+    // Using site to generate URL ratings
     const res2 = await fetch(
-      `https://stackoverflow.com/users/rank\?userId\=${userID}`
+      `https://${site}.com/users/rank?userId=${userID}`
     );
-    // get text, trim, and remove tags
     const ratingText = (await res2.text()).trim().replace(/(<([^>]+)>)/gi, "");
 
     const result = await StackOverflowCard(
@@ -90,7 +100,7 @@ http
       showAnimations,
       theme
     );
-
+    
     // res.setHeader(
     //   "Cache-Control",
     //   "private, no-cache, no-store, must-revalidate"
@@ -98,7 +108,6 @@ http
     // res.setHeader("Expires", "-1");
     // res.setHeader("Pragma", "no-cache");
     res.writeHead(200, { "Content-Type": "image/svg+xml" });
-
     res.write(result);
     res.end();
   })
